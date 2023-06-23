@@ -1,5 +1,5 @@
 from treact.core import Node
-from treact.renderers.rich import RichRenderer
+from treact.renderers.tree import TreeRenderer
 
 
 def component(name):
@@ -31,5 +31,5 @@ def tree():
             Node("under test")
 
 
-with RichRenderer():
+with TreeRenderer():
     tree()
