@@ -19,7 +19,7 @@ def render_tree(node):
 
 
 @contextmanager
-def TreeRenderer(buf=None, debug=False):
-    treact.__node_context__ = NodeContext(debug=debug)
+def TreeRenderer(buf=None):
+    treact.__node_context__ = NodeContext()
     yield
     print(render_tree(treact.__node_context__.root), file=buf)

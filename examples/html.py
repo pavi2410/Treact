@@ -1,35 +1,50 @@
-from treact.core import Node
-from treact.renderers.html import HtmlRenderer
+from treact.renderers.html import HtmlRenderer, html_node, text_node
 
 
 def component(name):
-    with Node(f"My comp {name}"):
-        Node("Text")
+    with html_node("pre"):
+        text_node('#' * (len(name) + 6))
+        text_node(f"# {name} #")
+        text_node('#' * (len(name) + 6))
 
 
-def container_wrapper(name):
-    n = Node(f"My wrapper comp {name}")
-    with n:
-        component(name)
-    return n
+def container():
+    return html_node("div", {"style": "border: 1px solid black"})
 
 
-def tree():
-    with Node("Root"):
-        with Node("A"):
-            component("123")
-            Node("B")
-            with Node("C"):
-                Node("D")
-        Node("E")
-        component("456")
-        for i in range(3):
-            Node(f"iter {i}")
-        with Node("F"):
-            Node("G")
-        with container_wrapper("test"):
-            Node("under test")
+styles = """
+button {
+    background-color: red;
+}
+"""
+
+
+def ui():
+    with html_node("html"):
+
+        with html_node("head"):
+
+            with html_node("title"):
+                text_node("Hello world")
+
+            with html_node("style"):
+                text_node(styles)
+
+        with html_node("body"):
+
+            with html_node("button", {"onclick": "alert('hello')"}):
+                text_node("Click me")
+
+            with html_node('ol'):
+                for i in range(3):
+                    with html_node('li'):
+                        text_node(f"list item {i}")
+
+            component("hello components 👋")
+
+            with container():
+                component("look ma, i m trapped in a container")
 
 
 with HtmlRenderer():
-    tree()
+    ui()

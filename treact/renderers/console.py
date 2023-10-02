@@ -1,11 +1,12 @@
 from contextlib import contextmanager
+import pprint
 
 import treact
 from treact.core import NodeContext
 
 
 @contextmanager
-def ConsoleRenderer(buf=None, debug=False):
-    treact.__node_context__ = NodeContext(debug=debug)
+def ConsoleRenderer(buf=None):
+    treact.__node_context__ = NodeContext()
     yield
-    print(treact.__node_context__.root, file=buf)
+    pprint.pprint(treact.__node_context__.root, indent=4, stream=buf)
