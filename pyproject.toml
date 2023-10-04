@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "treact"
-dynamic = ["version"]
+version = "0.0.1"
 description = ''
 readme = "README.md"
 requires-python = ">=3.7"
@@ -30,9 +30,6 @@ dependencies = []
 Documentation = "https://github.com/pavi2410/treact#readme"
 Issues = "https://github.com/pavi2410/treact/issues"
 Source = "https://github.com/pavi2410/treact"
-
-[tool.hatch.version]
-path = "src/treact/__about__.py"
 
 [tool.hatch.envs.default]
 dependencies = [
