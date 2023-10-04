@@ -1,10 +1,8 @@
-from dataclasses import dataclass, field
 import logging
+from dataclasses import dataclass, field
 from typing import Optional
 
-
-import treact
-
+from src import treact
 
 logger = logging.getLogger(__name__)
 

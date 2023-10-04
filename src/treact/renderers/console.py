@@ -1,8 +1,8 @@
-from contextlib import contextmanager
 import pprint
+from contextlib import contextmanager
 
-import treact
-from treact.core import NodeContext
+from src import treact
+from src.treact.core import NodeContext
 
 
 @contextmanager

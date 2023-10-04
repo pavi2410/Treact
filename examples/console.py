@@ -1,5 +1,5 @@
-from treact.core import Node
-from treact.renderers.console import ConsoleRenderer
+from src.treact.core import Node
+from src.treact.renderers.console import ConsoleRenderer
 
 
 def component(name):

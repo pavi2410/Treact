@@ -1,4 +1,4 @@
-from treact.renderers.html import HtmlRenderer, html_node, text_node
+from src.treact.renderers.html import html_node, text_node, HtmlRenderer
 
 
 def component(name):
@@ -21,9 +21,7 @@ button {
 
 def ui():
     with html_node("html"):
-
         with html_node("head"):
-
             with html_node("title"):
                 text_node("Hello world")
 
@@ -31,7 +29,6 @@ def ui():
                 text_node(styles)
 
         with html_node("body"):
-
             with html_node("button", {"onclick": "alert('hello')"}):
                 text_node("Click me")
 

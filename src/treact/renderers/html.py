@@ -1,10 +1,10 @@
 from contextlib import contextmanager
 from dataclasses import dataclass
 from typing import Optional
-from xml.dom.minidom import Document, Element
+from xml.dom.minidom import Document, Node as DomNode
 
-import treact
-from treact.core import Node, NodeContext
+from src import treact
+from src.treact.core import Node, NodeContext
 
 
 @dataclass
@@ -23,7 +23,7 @@ def text_node(text: str):
     return Node(text)
 
 
-def render_html(node: Optional[Node], document=Document()) -> Optional[Element]:
+def render_html(node: Optional[Node], document=Document()) -> Optional[DomNode]:
     if not node:
         return
 

@@ -1,5 +1,5 @@
-from treact.core import Node
-from treact.renderers.tree import TreeRenderer
+from src.treact.core import Node
+from src.treact.renderers.tree import TreeRenderer
 
 
 def component(name):

@@ -3,8 +3,8 @@ from contextlib import contextmanager
 from rich import print
 from rich.tree import Tree
 
-import treact
-from treact.core import NodeContext
+from src import treact
+from src.treact.core import NodeContext
 
 
 def render_tree(node):
