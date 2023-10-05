@@ -3,7 +3,6 @@ from dataclasses import dataclass
 from typing import Optional
 from xml.dom.minidom import Document, Node as DomNode
 
-from src import treact
 from src.treact.core import Node, NodeContext
 
 
@@ -13,14 +12,14 @@ class HtmlElement:
     attrs: dict[str, str]
 
 
-def html_node(tag: str, attrs: dict[str, str] | None = None):
-    if attrs is None:
-        attrs = {}
-    return Node(HtmlElement(tag, attrs))
+class HtmlNodeContext(NodeContext):
+    def html_node(self, tag: str, attrs: dict[str, str] | None = None):
+        if attrs is None:
+            attrs = {}
+        return self.create_node(HtmlElement(tag, attrs))
 
-
-def text_node(text: str):
-    return Node(text)
+    def text_node(self, text: str):
+        return self.create_node(text)
 
 
 def render_html(node: Optional[Node], document=Document()) -> Optional[DomNode]:
@@ -42,7 +41,7 @@ def render_html(node: Optional[Node], document=Document()) -> Optional[DomNode]:
 
 @contextmanager
 def HtmlRenderer(buf=None):
-    treact.__node_context__ = NodeContext()
-    yield
+    context = HtmlNodeContext()
+    yield context
     print('<!DOCTYPE html>', file=buf)
-    print(render_html(treact.__node_context__.root).toprettyxml(), file=buf)
+    print(render_html(context.root).toprettyxml(), file=buf)
