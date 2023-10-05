@@ -1,15 +1,15 @@
 from src.treact.renderers.html import HtmlRenderer
 
 
-def component(name, context):
-    with context.html_node("pre"):
+def component(name, c):
+    with c.pre:
         context.text_node('#' * (len(name) + 6))
         context.text_node(f"# {name} #")
         context.text_node('#' * (len(name) + 6))
 
 
-def container(context):
-    return context.html_node("div", {"style": "border: 1px solid black"})
+def container(c):
+    return c.div(style="border: 1px solid black")
 
 
 styles = """
@@ -19,28 +19,28 @@ button {
 """
 
 
-def ui(context):
-    with context.html_node("html"):
-        with context.html_node("head"):
-            with context.html_node("title"):
-                context.text_node("Hello world")
+def ui(c):
+    with c.html:
+        with c.head:
+            with c.title:
+                c.text_node("Hello world")
 
-            with context.html_node("style"):
-                context.text_node(styles)
+            with c.style:
+                c.text_node(styles)
 
-        with context.html_node("body"):
-            with context.html_node("button", {"onclick": "alert('hello')"}):
-                context.text_node("Click me")
+        with c.body:
+            with c.button(onclick="alert('hello')"):
+                c.text_node("Click me")
 
-            with context.html_node('ol'):
+            with c.ol:
                 for i in range(3):
-                    with context.html_node('li'):
-                        context.text_node(f"list item {i}")
+                    with c.li:
+                        c.text_node(f"list item {i}")
 
-            component("hello components 👋", context)
+            component("hello components 👋", c)
 
-            with container(context):
-                component("look ma, i m trapped in a container", context)
+            with container(c):
+                component("look ma, i m trapped in a container", c)
 
 
 with HtmlRenderer() as context:

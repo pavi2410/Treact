@@ -12,7 +12,16 @@ class HtmlElement:
     attrs: dict[str, str]
 
 
+class HtmlNode(Node):
+    def __call__(self, *args, **kwargs):
+        self.data.attrs.update(kwargs)
+        return self
+
+
 class HtmlNodeContext(NodeContext):
+    def create_node(self, data):
+        return HtmlNode(data, self)
+
     def html_node(self, tag: str, attrs: dict[str, str] | None = None):
         if attrs is None:
             attrs = {}
@@ -20,6 +29,9 @@ class HtmlNodeContext(NodeContext):
 
     def text_node(self, text: str):
         return self.create_node(text)
+
+    def __getattr__(self, tag_name: str):
+        return self.html_node(tag_name)
 
 
 def render_html(node: Optional[Node], document=Document()) -> Optional[DomNode]:
